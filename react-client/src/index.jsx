@@ -1,49 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
-import List from './components/List.jsx';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxPromise from 'redux-promise';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { 
-      items: [],
-      videos: []
-    }
-  }
+import App from './App.jsx';
+import reducers from './reducers';
 
-  componentDidMount() {
-    $.ajax({
-      url: '/items', 
-      success: (data) => {
-        this.setState({
-          items: data
-        })
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
-    $.ajax({
-      url: '/videos', 
-      success: (data) => {
-        this.setState({
-          videos: data
-        })
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
-  }
-
-  render () {
-    return (<div>
-      <h1>Item List</h1>
-      <List items={this.state.items}/>
-    </div>)
-  }
-}
-
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(
+  <Provider store={createStoreWithMiddleware(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())}>
+      <App />
+  </Provider>, document.getElementById('app')
+);

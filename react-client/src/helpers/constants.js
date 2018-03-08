@@ -1,0 +1,9 @@
+const SEARCH = 'SEARCH';
+const GET_HISTORY = 'GET_HISTORY';
+const SAVE_HISTORY = 'SAVE_HISTORY';
+
+export {
+  SEARCH,
+  GET_HISTORY,
+  SAVE_HISTORY
+};
