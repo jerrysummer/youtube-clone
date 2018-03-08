@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "react-dev": "webpack -d --watch",
-    "server-dev": "nodemon server/index.js"
+    "server-dev": "nodemon server/index.js",
+    "start": "react-dev && server-dev"
   },
-  "author": "Beth Johnson",
+  "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.23.1",
@@ -19,11 +20,16 @@
   "dependencies": {
     "angular": "^1.6.3",
     "body-parser": "^1.17.2",
+    "dotenv": "^5.0.1",
     "express": "^4.15.0",
     "jquery": "^3.1.1",
+    "lodash": "^4.17.5",
     "mongoose": "^4.8.6",
     "mysql": "^2.13.0",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "youtube-api-search": "0.0.5"
   }
 }

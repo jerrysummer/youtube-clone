@@ -7,7 +7,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      items: []
+      items: [],
+      videos: []
     }
   }
 
@@ -17,6 +18,18 @@ class App extends React.Component {
       success: (data) => {
         this.setState({
           items: data
+        })
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
+
+    $.ajax({
+      url: '/videos', 
+      success: (data) => {
+        this.setState({
+          videos: data
         })
       },
       error: (err) => {
