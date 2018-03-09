@@ -6,3 +6,6 @@ cd /path/to/directory
 npm install
 npm start
 ```
+### Demo
+
+![Game Preview](./demogif.gif)
