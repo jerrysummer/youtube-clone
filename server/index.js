@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const YTSearch = require('youtube-api-search');
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
 // const items = require('../database-mysql');
-const items = require('../database-mongo');
+// const items = require('../database-mongo');
 require('dotenv').config();
 var request = require('request');
 
@@ -14,15 +14,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/../react-client/dist'));
 
 
-app.get('/items', function (req, res) {
-  items.selectAll(function(err, data) {
-    if(err) {
-      res.sendStatus(500);
-    } else {
-      res.json(data);
-    }
-  });
-});
+// app.get('/items', function (req, res) {
+//   items.selectAll(function(err, data) {
+//     if(err) {
+//       res.sendStatus(500);
+//     } else {
+//       res.json(data);
+//     }
+//   });
+// });
 
 app.post('/videos', function (req, res) {
   const term = req.body.payload;
