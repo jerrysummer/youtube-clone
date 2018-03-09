@@ -8,4 +8,4 @@ npm start
 ```
 ### Demo
 
-![Game Preview](./demogif.gif)
+![Game Preview](./demo.png)
