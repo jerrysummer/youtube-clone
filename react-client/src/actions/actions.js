@@ -3,6 +3,19 @@ import { SEARCH, GET_HISTORY, SAVE_HISTORY } from '../helpers/constants';
 
 const searchYT = (payload) => {
   const url = '/videos';
+  return axios
+    .post(url, {payload})
+    .then(videos => ({
+      type: SEARCH,
+      payload: videos.data,
+    }))
+    .catch((error) => {
+      console.log('search err! ', error);
+    });
+};
+
+const selectVideo = (payload) => {
+  const url = '/videos';
 
   return axios
     .get(url, payload)

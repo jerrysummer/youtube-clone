@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import { searchYT } from './actions/actions';
 
 import List from './components/List.jsx';
 import SearchBar from './components/SearchBar.jsx';
+import VideoList from './components/VideoList.jsx';
+import CurrentVideo from './components/CurrentVideo.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,39 +18,21 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount() {
-    $.ajax({
-      url: '/items', 
-      success: (data) => {
-        this.setState({
-          items: data
-        })
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
-
-    $.ajax({
-      url: '/videos', 
-      success: (data) => {
-        this.setState({
-          videos: data
-        })
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
-  }
 
   render () {
-    return (<div>
-      <h1>Item List</h1>
-      <List items={this.state.items}/>
+    return (
+    <div>
       <SearchBar/>
+      <CurrentVideo video={this.props.currentVideo}/>
+      <VideoList videos={this.props.videos}/>
     </div>)
   }
 }
 
-export default App;
+const mapStateToProps = (state, ownProps) => ({
+  videos: state.videos,
+  currentVideo: state.currentVideo,
+});
+
+
+export default connect(mapStateToProps, { })(App);

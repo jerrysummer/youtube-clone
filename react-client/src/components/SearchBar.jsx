@@ -21,6 +21,9 @@ class SearchBar extends Component {
     this.search(term);
   }
 
+  componentDidMount() {
+    this.props.searchYT('hp')
+  }
 
   render() {
     return (

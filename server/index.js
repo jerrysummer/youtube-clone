@@ -5,13 +5,14 @@ const YTSearch = require('youtube-api-search');
 // const items = require('../database-mysql');
 const items = require('../database-mongo');
 require('dotenv').config();
-
-
+var request = require('request');
 
 const app = express();
 
-// UNCOMMENT FOR REACT
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/../react-client/dist'));
+
 
 app.get('/items', function (req, res) {
   items.selectAll(function(err, data) {
@@ -23,11 +24,18 @@ app.get('/items', function (req, res) {
   });
 });
 
-app.get('/videos', function (req, res) {
+app.post('/videos', function (req, res) {
+  const term = req.body.payload;
   const { API_KEY } = process.env;
-  YTSearch({ key: API_KEY, term: 'hp' }, videos => {
-    res.json(videos);
-  });
+  const URL = "https://www.googleapis.com/youtube/v3/search?" + "key=" + API_KEY + "&q=" + term + "&part=snippet"; 
+
+  request(URL, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      res.send(body) 
+    } else {
+      console.log(error)
+    }
+  })
 });
 
 app.listen(3000, function() {
